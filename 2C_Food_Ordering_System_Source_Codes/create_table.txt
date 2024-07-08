@@ -1,0 +1,53 @@
+CREATE DATABASE twt2;
+
+-- Table: Users
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    Password VARCHAR(50) NOT NULL
+);
+
+-- Table: MenuItems
+CREATE TABLE MenuItems (
+    ItemID INT PRIMARY KEY AUTO_INCREMENT,
+    ItemName VARCHAR(100) NOT NULL,
+    Description TEXT,
+    Price DECIMAL(8, 2) NOT NULL
+);
+
+-- Table: Orders
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    OrderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    TotalAmount DECIMAL(10, 2) NOT NULL, -- Total for the entire order,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+-- Table: OrderDetails
+CREATE TABLE OrderDetails (
+    OrderDetailID INT PRIMARY KEY AUTO_INCREMENT,
+    OrderID INT,
+    ItemID INT,
+    Quantity INT NOT NULL,
+    Subtotal DECIMAL(10, 2) NOT NULL, -- Total price for the quantity of this item
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (ItemID) REFERENCES MenuItems(ItemID)
+);
+
+INSERT INTO menuitems (ItemName, Description, Price) VALUES
+('Prime Ribeye Steak', 'Indulge in our premium Prime Ribeye Steak, a succulent cut rich in flavor and marbled for a tender, juicy bite. Served with garlic herb butter and roasted vegetables, promises an unforgettable dining experience.', 25.90),
+('Teriyaki Elegance with Blossoms', 'Indulge in our Teriyaki Elegance with Blossoms, featuring tender chicken marinated in our signature teriyaki sauce, grilled to perfection and delicately garnished with edible blossoms.', 28.90),
+('Grilled Tiger Prawn', 'Grilled Tiger Prawn is a luxurious seafood dish with large, succulent prawns marinated in herbs, citrus, and spice. Expertly grilled, they have a smoky aroma and juicy texture.', 22.90),
+('Grilled Lobster with Garnish', 'Delight in our Grilled Lobster with Garnish, where butter-poached lobster tail is expertly grilled to perfection, served with a drizzle of lemon-infused butter and seasonal greens.', 29.90);
+
+INSERT INTO menuitems (ItemName, Description, Price) VALUES
+('Ice Cream Vanilla Latte', 'Treat yourself to our Ice Cream Vanilla Latte, blending creamy vanilla ice cream with rich espresso, topped with a generous swirl of whipped cream, offering classic favorite.', 15.90),
+('Orange Cocoa Soymilk Latte', 'Experience a unique blend of flavors with our Orange Cocoa Soymilk Latte. This delightful beverage combines the zesty tang of fresh oranges with the deep richness of cocoa.', 12.90),
+('Strawberry Hot Soymilk', 'Experience the cozy indulgence of our Strawberry Hot Soymilk, where warm soymilk infused with sweet strawberries provides a nourishing drink perfect for any time of day.', 12.50),
+('Soymilk Latte With Milk Cap', 'Discover a delightful fusion of flavors in our Soymilk Latte With Milk Cap. This unique beverage combines the smooth richness of soymilk with the frothy indulgence of a milk cap.', 14.90),
+('Tiramisu', 'Savor the classic Italian indulgence of our Tiramisu. Layers of delicate ladyfinger biscuits soaked in espresso and layered with creamy mascarpone cheese, dusted with cocoa powder.', 10.90),
+('Chocolate Raspberry', 'Indulge in the delightful combination of rich, velvety chocolate and the tart sweetness of ripe raspberries. Our Chocolate Raspberry dessert perfect for satisfying your sweet cravings.', 10.50),
+('Hazelnut', 'Delight in the nutty richness of our Hazelnut dessert. A luscious hazelnut mousse nestled within a delicate hazelnut sponge cake, finished with a layer of smooth chocolate ganache.', 12.50),
+('Strawberry Chantilly', 'Experience the delicate elegance of our Strawberry Chantilly dessert. Light and airy Chantilly cream folded with fresh strawberries, layered between soft sponge cake.', 10.90);

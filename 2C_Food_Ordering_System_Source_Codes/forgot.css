@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #f6f5f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    height: 90vh;
+    margin: -20px 0 50px;
+}
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+
+
+span {
+    font-size: 12px;
+    display: block;
+    margin: 10px 0;
+}
+
+
+
+.countdown {
+    border-radius: 10px;
+    border: none;
+    background-color: white;
+    color:#00c6fb;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    transition: transform 80ms ease-in, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+
+form {
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+input {
+    background-color: white;
+    border: 1px solid #00c6fb; 
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 20%;
+    border-radius: 30px;
+}
+
+input::placeholder {
+    color: #00c6fb; /* Change to your desired color */
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+input:focus {
+    border-color: #00c6fb; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+    background-color: #e0f7ff; /* Optional: change background color on focus */
+}
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.logout-container {
+    left: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+button {
+    margin-top: 5px;
+    border-radius: 20px;
+    border: 1px solid #00c6fb; 
+    background-color: #00c6fb; 
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in, background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #79dbfc; /* Lighter orange on hover */
+    border-color:#79dbfc; /* Lighter orange border on hover */
+  }
+  
+  
+  button:active {
+      transform: scale(0.95);
+  }
+  
+  button:focus {
+      outline: none;
+  }
+  
+  button.ghost {
+    background-color: transparent;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  button.ghost:hover {
+    background-color:#FFFFFF; /* Darker orange on hover */
+    color: #00c6fb; /* Keep the text color white */
+  }

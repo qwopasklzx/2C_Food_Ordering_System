@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GUER</title>
+  <link rel="shortcut icon" href= "images/0.png">
+  
+  <!-- Slick Slider CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+  
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+  
+  }
+
+  .loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('images/loading 1.jpg'); /* Replace with your image path */
+    background-size: cover; /* Ensure the image covers the whole container */
+    background-position: center; /* Center the image */
+    z-index: 9999; /* Ensure it's above other content */
+  }
+
+  
+  .progress-bar {
+    width: 80%;
+    max-width: 400px;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .progress {
+    width: 0;
+    height: 100%;
+    background-image: linear-gradient(to right, #ff1b6b, #ec58c0, #b48cf9, #6ab1ff, #45caff);
+    animation: fill 3s infinite;
+  }
+  
+  @keyframes fill {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+  nav {
+    width: 200%;
+    height: 85px;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  nav .logo img {
+    height: 100px; /* Adjust as needed */
+    width: 100px; /* Ensure the width is equal to the height */
+    border-radius: 50%;
+  }  
+  
+  .navigation ul{
+    margin-left: 825px;
+  }
+  
+  .navigation ul li {
+    display: inline-block;
+    margin-right: 30px;
+  }
+  
+  .navigation ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+    margin-right: -0px;
+  }
+  
+  .navigation ul li a:hover {
+    color: rgb(121, 219, 252);
+  }
+
+  /* Slick Slider Styles */
+  .slider {
+    position: relative;
+    height: 80vh; /* Use viewport height to fill the entire screen */
+    margin-top: 60px; /* Adjust to prevent overlap with the nav bar */
+  }
+  .slide {
+    position: relative;
+    height: 100%; /* Occupy full height of the slider container */
+    background-size: cover;
+    background-position: center;
+  }
+  .slide .slide-content {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    color: white; /* Example: White text for contrast */
+    opacity: 0;
+    transition: opacity 1.5s ease, transform 1.5s ease; /* Smooth transition for opacity and transform */
+    font-size: 30px;
+
+  }
+  .slide.slick-active .slide-content {
+    opacity: 1; /* Show slide content when slide is active */
+    transform: translate(-50%, -30%); /* Adjust transform for slide content to slightly move up */
+  }
+  .slide.left .slide-content {
+    text-align: left;
+    margin-left: -100px;
+    margin-top: 80px;
+  }
+  .slide.center .slide-content {
+    text-align: center;
+    margin-top: 50px;
+  }
+  .slide.right .slide-content {
+    text-align: right;
+    margin-left: 90px;
+    margin-top: 140px;
+  }
+  .slide img {
+    width: 100%;
+    height: 100vh; /* Adjust height to make images smaller */
+    object-fit: cover; /* Ensure image covers the entire slide */
+    opacity: 0;
+    transition: opacity 1.5s ease; /* Smooth transition for opacity */
+  }
+  .slide.slick-active img {
+    opacity: 1; /* Show image when slide is active */
+  }
+
+  .specialities {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 10%;
+    padding-bottom: 5%;
+    background-color: white;
+  }
+  .speciality {
+    text-align: center;
+    width: 30%;
+    margin-top: 50px;
+  }
+  .speciality img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+  .speciality img:hover {
+    transform: rotate(6deg); /* Adjust the rotation angle as per your preference */
+    animation: shake 1.0s ease-in-out; /* Define the shake animation */
+  }
+  
+  @keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(6deg); } /* Adjusted to 6 degrees */
+    50% { transform: rotate(-6deg); } /* Adjusted to -6 degrees */
+    75% { transform: rotate(3deg); } /* Adjusted to 3 degrees */
+    100% { transform: rotate(0deg); }
+  }
+  .speciality h3 {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  .speciality p {
+    font-size: 16px;
+    color: #333;
+  }
+  /* General Footer Styles */
+footer {
+  background: white; /* Black background */
+  color: black; /* White text */
+  padding-top: 40px;
+  padding-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: justify;
+  
+}
+
+/* Container to center the footer content */
+.container {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Row to create columns */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Column styling */
+.footer_column {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #666;
+
+}
+
+.col-md-3, .col-sm-6 {
+  width: 25%;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .col-md-3, .col-sm-6 {
+      width: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .col-md-3, .col-sm-6 {
+      width: 100%;
+  }
+}
+
+/* Headings */
+.footer_column .heading {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: rgb(121, 219, 252);
+}
+
+/* Horizontal rule */
+.hr {
+  border: 0;
+  border-top: 1px solid #666;
+  margin: 10px 0;
+}
+
+/* Lists */
+.widget_links {
+  list-style: none;
+  padding: 0;
+}
+
+.widget_links li {
+  margin-bottom: 10px;
+}
+
+.widget_links li a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.widget_links li a:hover {
+  color:rgb(121, 219, 252);
+}
+
+/* Address and contact info */
+.address {
+  margin: 10px 0;
+  
+}
+
+.address i {
+  margin-right: 10px;
+}
+
+/* Newsletter form */
+.newsletter .form-group {
+  margin-bottom: 15px;
+  
+}
+
+.newsletter input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.newsletter .btn-submit {
+  background: rgb(121, 219, 252);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.newsletter .btn-submit:hover {
+  background: rgb(16, 195, 255);
+}
+
+
+/* Copyright */
+.copyright {
+  text-align: center;
+  padding-top: 20px;
+  margin-top: -20px;
+  margin-left: 450px;
+}
+
+
+  .slick-dots li button:before {
+    font-size: 10px; /* Increase the size of the dots */
+    color: white; /* Change the color of the dots to black */
+    animation: pulse 2s infinite;
+  }
+  .slick-dots li.slick-active button:before {
+    color: rgb(121, 219, 252); /* Ensure active dot is also black */
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.number-counters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Adjust gap as needed */
+}
+
+.section-title {
+  font-size: 2em; /* Adjust font size as needed */
+  margin-bottom: 30px; /* Adjust spacing as needed */
+  font-weight: bold; /* Optional: Make the title bold */
+  text-align: center;
+}
+
+#facts {
+  background: url('images/broccoli.jpg');
+  background-size: cover;
+  background-position: center bottom;
+  padding: 40px 0; /* Increase padding for more space */
+  color: #fff; /* Ensure text is readable on the background image */
+}
+
+.section-title {
+  font-size: 32px; /* Increase font size */
+  margin-bottom: 30px; /* Adjust spacing as needed */
+  font-weight: bold; /* Optional: Make the title bold */
+}
+
+.number-counters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px; /* Increase gap between items */
+}
+
+.counters-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px; /* Increase padding for better spacing */
+  background: transparent; /* Optional: Add background color with transparency for readability */
+  border-radius: 10px; /* Optional: Add border radius for rounded corners */
+}
+
+.counters-item img {
+  width: 200px; /* Increase image size */
+  height: 200px; /* Increase image size */
+  margin-bottom: 10px; /* Increase spacing */
+  animation: floatAnimation 2s ease-in-out infinite alternate; /* Adjust animation duration and timing as needed */
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px); /* Adjust floating distance */
+  }
+}
+
+.counters-item h2 {
+  font-size: 24px; /* Increase font size */
+  margin: 20px 0; /* Increase spacing */
+}
+
+.counters-item p {
+  font-size: 16px; /* Increase font size */
+  margin: 0;
+}
+</style>
+<body>
+
+<div class="loader-container">
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+</div>
+
+<!-- Navigation Bar -->
+<nav>
+  <div class="logo">
+    <img src="images/restaurant.gif" alt="Logo">
+  </div>
+  <h1>GUER Foodie</h1>
+  <div class="navigation">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="loginsignup.html">Order Now</a></li>
+  </ul>
+  </div>
+</nav>
+
+<!-- Slider Container -->
+<div class="slider" id="home">
+  <!-- Slide 1 -->
+  <div class="slide left">
+    <img src="images/rou.jpg" alt="Slide 1">
+    <div class="slide-content">
+      <h2>Delicious Steak</h2>
+      <p>Enjoy our mouth-watering steak dishes made with<br>the finest ingredients</p>
+    </div>
+  </div>
+  
+  <!-- Slide 2 -->
+  <div class="slide center">
+    <img src="images/cupcake.jpg" alt="Slide 2" style="object-position: 100% 10%;">
+    <div class="slide-content">
+      <h2>Decadent Desserts</h2>
+      <p>Satisfy your sweet tooth with our delightful dessert selections</p>
+    </div>
+  </div>
+  
+  <!-- Slide 3 -->
+  <div class="slide right">
+    <img src="images/cucumber.jpg" alt="Slide 3" style="object-position: 40% 10%;">
+    <div class="slide-content">
+      <h2>Refreshing Drinks</h2>
+      <p>Quench your thirst with our unique choices</p>
+    </div>
+  </div>
+</div>
+
+<div class="specialities" id="specialities">
+    <div class="speciality">
+      <img src="images/healthy-food.gif" alt="Speciality Icon 1">
+      <h3>Quality Ingredients</h3>
+      <p>We use only the finest and freshest<br>ingredients in all our dishes.</p>
+    </div>
+    <div class="speciality">
+      <img src="images/catering.gif" alt="Speciality Icon 2">
+      <h3>Expert Chefs</h3>
+      <p>Our chefs are highly trained and experienced<br>in creating delicious meals.</p>
+    </div>
+    <div class="speciality">
+      <img src="images/food-delivery.gif" alt="Speciality Icon 3">
+      <h3>Fast Delivery</h3>
+      <p>Enjoy our quick and reliable delivery<br>service to get your food fast.</p>
+    </div>
+  </div>
+
+  <section id="facts">
+  <div class="container">
+    <h2 class="section-title text-center" style="margin-left: 440px; color: black;">Experiences</h2>
+    <div class="row number-counters"> 
+      <!-- first count item -->
+      <div class="col-sm-3 col-xs-12 text-center wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" style="margin-left: 385px; color:black;">
+        <div class="counters-item row">
+          <img src="images/like.png" alt="Happy Customers" style="width:50px;height:50px;"> 
+          <h2><strong data-to="46000">0</strong><span class="plus-sign">+</span></h2>
+          <p>Satisfied Customers</p>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-12 text-center wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms" style="color:black;">
+        <div class="counters-item row"> 
+          <img src="images/fast-food.png" alt="Dishes Served" style="width:50px;height:50px;">
+          <h2><strong data-to="8500">0</strong><span class="plus-sign">+</span></h2>
+          <p>Dishes Served</p>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-12 text-center wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms" style="color:black;">
+        <div class="counters-item row"> 
+          <img src="images/coffee-cup.png" alt="Total Desserts" style="width:50px;height:50px;">
+          <h2><strong data-to="5800">0</strong><span class="plus-sign">+</span></h2>
+          <p>Coffees Served</p>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-12 text-center wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1200ms" style="color:black;">
+        <div class="counters-item row"> 
+          <img src="images/cake.png" alt="Cup of coffees" style="width:50px;height:50px;">
+          <h2><strong data-to="3300">0</strong><span class="plus-sign">+</span></h2>
+          <p>Drinks Served</p>
+        </div>
+      </div>
+    </div>  
+  </div>
+</section>
+
+  <footer class="padding-top bg_black">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 footer_column">
+                <h4 class="heading">Who are we?</h4>
+                <hr class="half_space">
+                <p class="half_space"></p>
+                <p>We are an ordering food company named GUER, based in Melaka, Malaysia. Launched in Melaka, GUER has grown from a home project to one of the largest food aggregators in the world.
+                   We are present in 10 countries and 10+ cities globally, enabling our vision of better food for more people. We not only connect people to food in every context but work closely 
+                   with restaurants to enable a sustainable ecosystem.</p>
+            </div>
+            <div class="col-md-3 col-sm-6 footer_column">
+                <h4 class="heading">Quick Links</h4>
+                <hr class="half_space">
+                <ul class="widget_links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="loginsignup.html">Order Now</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 footer_column">
+                <h4 class="heading">Newsletter</h4>
+                <hr class="half_space">
+                <p class="icon"><i class="icon-dollar"></i>Sign up with your name and email to get fresh updates.</p>
+                <div id="result1" class="text-center"></div>        
+                <form action="http://themesindustry.us13.list-manage.com/subscribe/post-json?u=4d80221ea53f3a4487ddebd93&id=494727d648&c=?" method="get" onSubmit="return false" class="newsletter">
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" required name="EMAIL" id="EMAIL" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn-submit button3" value="Subscribe" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3 col-sm-6 footer_column">
+              <h4 class="heading">Get in Touch</h4>
+              <hr class="half_space">
+              <p>Jalan Ayer Keroh Lama, 75450 Bukit Beruang, Melaka</p>
+              <p>(+60) 1234567890</p>
+              <p><a href="mailto:1211101231@student.mmu.edu.my">1211101231@student.mmu.edu.my</a></p>
+          </div>           
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copyright clearfix">
+                    <p>Copyright &copy; 2024 GUER. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Slick Slider JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+<!-- Custom JS for Slider Initialization -->
+<script>
+$(document).ready(function(){
+  $('.slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 7000,
+    arrows: true,
+    prevArrow: '<button type="button" class="slick-prev">Previous</button>',
+    nextArrow: '<button type="button" class="slick-next">Next</button>',
+    dots: true,
+    pauseOnFocus: false,    // Change 2: Ensure autoplay doesn't stop on focus
+    pauseOnDotsHover: false,
+    pauseOnHover: false,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+        }
+      }
+    ]
+  });
+
+  // Custom function to handle slide content animations
+  function handleSlideAnimations() {
+    $('.slide').each(function() {
+      if ($(this).hasClass('slick-active')) {
+        $(this).find('.slide-content').addClass('active');
+        $(this).find('img').addClass('active'); // Add active class to image
+      } else {
+        $(this).find('.slide-content').removeClass('active');
+        $(this).find('img').removeClass('active'); // Remove active class from image
+      }
+    });
+  }
+
+  // Initialize slide animations
+  handleSlideAnimations();
+
+  // Add event listener for after change of slide
+  $('.slider').on('afterChange', function(event, slick, currentSlide){
+    handleSlideAnimations();
+  });
+});
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var countersSection = document.getElementById('facts');
+    var counters = document.querySelectorAll("h2 strong");
+    var countersStarted = false;
+
+    var updateCount = function(counter) {
+      var target = +counter.getAttribute("data-to");
+      var count = +counter.innerText;
+      var increment = target / 200;
+
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(function() { updateCount(counter); }, 10);
+      } else {
+        counter.innerText = target;
+      }
+    };
+
+    var startCounters = function() {
+      if (!countersStarted) {
+        countersStarted = true;
+        counters.forEach(function(counter) {
+          updateCount(counter);
+        });
+      }
+    };
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          startCounters();
+          observer.unobserve(countersSection); // Stop observing after the animation starts
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(countersSection);
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Simulate loading completion (for demonstration purposes)
+  setTimeout(function() {
+    // Hide the loader
+    document.querySelector('.loader-container').style.display = 'none';
+    // Show the main content
+    document.getElementById('main-content').style.display = 'block';
+    // Optionally, redirect to the main page after a delay
+    setTimeout(function() {
+      window.location.href = 'index.html'; // Replace with your main page URL
+    }, 2000); // Adjust the delay (in milliseconds) as needed
+  }, 3000); // Adjust the duration of your loading animation (in milliseconds)
+});
+</script>
+</body>
+</html>

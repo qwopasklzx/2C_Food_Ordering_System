@@ -1,0 +1,404 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+  /* margin: 0;
+  padding: 0; */
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.order-welcome {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  width: 1519.5px;
+  margin-left: -55px;
+  margin-top: -7px;
+}
+
+.order-welcome h1 {
+  margin-left: 10px;
+  font-size: 24px;
+  color: #333333;
+}
+
+.order-welcome img {
+  height: 100px; /* Adjust height as needed */
+  margin-left: 20px;
+  width: 110px;
+}
+
+.navigation ul{
+  margin-left: 503px;
+}
+
+.navigation ul li {
+  display: inline-block;
+  margin-right: 17px;
+}
+
+.navigation ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.navigation ul li a:hover {
+  color: rgb(121, 219, 252);
+}
+
+.shoppingcart1 {
+  width: 1410px;
+  margin: auto;
+  transition: 0.5s;
+}
+
+.active .shoppingcart1 {
+  transform: translateX(-280px);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -50px;
+}
+
+header h1 {
+  margin-left: -20px;
+  margin-top: 80px;
+  margin-bottom: 0px;
+  font-size: 40px;
+  font-weight: 1000;
+}
+
+header .shopping {
+  position: relative;
+  cursor: pointer;
+  margin-top: 75px;
+  margin-right: -15px;
+
+}
+
+header .shopping i {
+  font-size: 30px;
+  color: #000;
+
+}
+
+header .shopping span {
+  background: #00c6fb;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 3px 7px;
+  font-size: 12px;
+}
+
+/* Side Cart */
+.sidecart {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  width: 500px;
+  background-color: white;
+  height: 100vh;
+  transition: 0.5s;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column; /* Added to use flex layout */
+}
+
+.active .sidecart {
+  left: calc(100% - 450px);
+}
+
+.active .container {
+  transform: translateX(-280px);
+}
+
+.cart-header {
+  display: flex;
+}
+
+.cart-header h1{
+  color: black;
+  font-weight: 1000;
+  padding: 0 20px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  margin-top: 13px;
+}
+
+.cart-header .closeshopping {
+  background-color: #1C1F25;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  margin-top: 38px;
+  margin-left: 38px;
+}
+
+.cart-header .closeshopping i {
+  font-size: 16px;
+}
+
+
+
+.sidecart .checkout {
+  position: relative;
+  bottom: 0;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.sidecart .checkout div {
+  background-color: #1C1F25;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: white;
+}
+
+.sidecart .checkout div:nth-child(2) {
+  background-color: #1C1F25;
+  color: #fff;
+}
+
+.sidecart .checkout .total {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sidecart .checkout .totalprice {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.listcart {
+  flex: 1; /* Takes up remaining space in the container */
+  margin-top: -10px;
+  overflow-y: auto; /* Enables vertical scrolling */
+}
+
+.listcart li {
+  display: grid;
+  grid-template-columns: 100px repeat(3, 1fr);
+  color: #fff;
+  row-gap: 10px;
+}
+
+.listcart li div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.listcart li img {
+  width: 90%;
+}
+
+.listcart li button {
+  background-color: #fff5;
+  border: none;
+}
+
+.listcart .count {
+  margin: 0 10px;
+}
+
+/*Side Cart*/
+body {
+  background-color: #E3E7E8;
+}
+
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 1.5em;
+  transition: 0.5s;
+
+}
+
+
+.menu-group-heading {
+  margin: 0;
+  padding-bottom: 0.6em;
+  border-bottom: 2px solid #ccc;
+  font-size: 2em;
+  font-weight: 500;
+}
+
+.menu-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5em;
+  padding: 2em 0;
+}
+
+.menu-item {
+  display: flex;
+}
+
+.menu-item-img {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+  /*object-fit: cover;*/
+  margin-right: 1.5em;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+
+}
+
+.menu-item-heading {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 1em 0;
+}
+
+.menu-item-desc {
+  line-height: 1.6;
+  text-align: justify;
+}
+
+@media screen and (min-width: 992px) {
+  
+  .menu-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+/* Add to Cart Button */
+
+
+.fa-check{
+  background:#00c6fb;
+}
+
+.addtocart{
+  border-radius:50px;
+  border:none;
+  font-size:1em;
+  position:relative;
+  background:black;
+  cursor:pointer;
+  height:2.5em;
+  width:7em;
+  overflow:hidden;
+  transition:transform 0.1s;
+  z-index:1;
+}
+.addtocart:hover{
+  transform:scale(1.1);
+}
+
+.pretext{
+  color:#fff;
+  background:black;
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1em;
+}
+
+.done{
+  background:#00c6fb;
+  position:absolute;
+  width:100%;
+  top:0;
+  left:0;
+  transition:transform 0.3s ease;
+  transform:translate(-110%) skew(-40deg);
+}
+
+.posttext{
+  background:#00c6fb;
+  padding-left: 2px;
+}
+
+.icon-spacing {
+  margin-right: 5px; /* Adjust the spacing value as needed */
+}
+
+/* Place Order Button */
+.place-order-button {
+  display: inline-block;
+  background-color: #28a745; /* Green background */
+  color: white; /* White text */
+  padding: 20px 40px; /* Padding for a nice button size */
+  font-size: 16px; /* Font size */
+  border: none; /* Remove default border */
+  border-radius: 0px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.place-order-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.place-order-button:active {
+  background-color: #1e7e34; /* Even darker green when pressed */
+}
+
+.place-order-button:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 5px #28a745; /* Green shadow when focused */
+}
+
+
+footer {
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 999;
+  padding: 8px 0;
+}
+
+footer p {
+  margin: 10px 0;
+}
+
+footer i {
+  color: #00c6fb;
+}
+
+footer a {
+  color: #00c6fb;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: #0073e6; /* Change color on hover for better visual feedback */
+}

@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <title>GUER</title>
+  <link rel="shortcut icon" href="images/0.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+
+    }
+    nav {
+    width: 200%;
+    height: 105px;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  nav .logo img {
+    height: 100px; /* Adjust as needed */
+    width: 100px; /* Ensure the width is equal to the height */
+    border-radius: 50%;
+  }  
+  
+  .navigation ul{
+    margin-left: 825px;
+  }
+  
+  .navigation ul li {
+    display: inline-block;
+    margin-right: 30px;
+  }
+  
+  .navigation ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+    margin-right: -0px;
+  }
+  
+  .navigation ul li a:hover {
+    color: rgb(121, 219, 252);
+  }
+    .abt {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      overflow: hidden;
+    }
+    .abt video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+    .initial-content, .hidden-content {
+      position: absolute;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .initial-content img {
+      margin-top: 120px;
+      margin-left: -80px;
+      top: 100px;
+      width: 150px;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: scale(0.8); /* Slightly scale down the image */
+      transition: opacity 1s; /* Adjust timing to match the total duration of hidden elements' animations */
+    }
+    .hidden-content {
+      margin-top:140px;
+      margin-left: -70px;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      opacity: 0;
+      color:black;
+      transition: opacity 1s;
+    }
+    .hidden-content .box {
+      width: 40%;
+      margin: 10px 0;
+      padding: 20px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 40px;
+      font-size: 24px;
+      position: absolute;
+      opacity: 0;
+
+    }
+    .hidden-content .box:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      text-align: left;
+      animation: fadeInLeft 1s forwards 1s;
+    }
+    .hidden-content .box:nth-child(2) {
+      top: 30%;
+      right: 10%;
+      text-align: right;
+      animation: fadeInRight 1s forwards 2s;
+    }
+    .hidden-content .box:nth-child(3) {
+      top: 50%;
+      left: 10%;
+      text-align: left;
+      animation: fadeInLeft 1s forwards 3s;
+    }
+    .hidden-content .box:nth-child(4) {
+      top: 70%;
+      right: 10%;
+      text-align: right;
+      animation: fadeInRight 1s forwards 4s;
+    }
+    .abt:hover .initial-content {
+      opacity: 0;
+      transition-delay: 0s; /* Ensure the hidden content appears immediately */
+
+    }
+    .abt:hover .hidden-content {
+      opacity: 1;
+      transition-delay: 0s; /* Ensure the hidden content appears immediately */
+
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-100%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(100%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes showImage {
+    from { opacity: 0; }
+    to { opacity: 1; }
+    }
+ 
+
+
+    .book-section {
+  background: url('images/vege.png') no-repeat center center;
+  background-size: cover;
+  background-position: top;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.book {
+  transition: opacity 0.4s 0.2s;
+  perspective: 250vw;
+  font-family: 'Cormorant Garamond', serif;
+  line-height: 13px;
+  margin-left: 400px;
+  margin-top: 10px;
+}
+
+.page-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book h3 {
+  margin-top: 6vw;
+  text-align: center;
+  font-size: 24px;
+  color: white;
+}
+
+.book p {
+  margin-top: 8vw;
+  text-align: center;
+  font-size: 16px;
+  color: white;
+}
+
+.page {
+  width: 30vw;
+  height: 59vw;
+  background-color: white;
+  margin-bottom: 0.5em;
+  background: left top no-repeat;
+  background-size: cover;
+  text-align: center;
+  padding: 20px;
+  border: 30px solid transparent; /* Adjust as necessary */
+  border-image-source: url('images/border.png'); /* Use the correct path */
+  border-image-slice: 100; /* Adjust as necessary */
+  border-image-repeat: stretch; /* Options: stretch, repeat, round, space */
+  line-height: 24px;
+}
+
+.page p {
+  width: 70%;
+  text-align: justify;
+  margin-left: 60px;
+}
+
+.page:nth-child(even) {
+  clear: both;
+}
+
+.book {
+  perspective: 250vw;
+}
+
+.book .pages {
+  width: 60vw;
+  height: 45vw;
+  position: relative;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  border-radius: 4px;
+}
+
+.book .page {
+  float: none;
+  clear: none;
+  margin: 0;
+  position: absolute;
+  margin-top: 60px;
+  width: 30vw;
+  height: 37vw;
+  transform-origin: 0 0;
+  transition: transform 1.4s;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  user-select: none;
+  background-color: black;
+  transition: transform 0.7s ease-in-out;
+  backface-visibility: hidden;
+}
+
+.book .page:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.7s;
+  z-index: 2;
+}
+
+.book .page:nth-child(odd) {
+  pointer-events: all;
+  transform: rotateY(0deg);
+  right: 0;
+  border-radius: 0 4px 4px 0;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, .15) 0%, rgba(0, 0, 0, 0) 10%);
+}
+
+.book .page:nth-child(odd):hover {
+  transform: rotateY(-15deg);
+}
+
+.book .page:nth-child(odd):hover:before {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.book .page:nth-child(odd):before {
+  background: rgba(0, 0, 0, 0);
+}
+
+.book .page:nth-child(even) {
+  pointer-events: none;
+  transform: rotateY(180deg);
+  transform-origin: 100% 0;
+  left: 0;
+  border-radius: 4px 0 0 4px;
+  background-image: linear-gradient(to left, rgba(0, 0, 0, .12) 0%, rgba(0, 0, 0, 0) 10%);
+}
+
+.book .page:nth-child(even):before {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.book .page.grabbing {
+  transition: none;
+}
+
+.book .page.flipped:nth-child(odd) {
+  pointer-events: none;
+  transform: rotateY(-180deg);
+}
+
+.book .page.flipped:nth-child(odd):before {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.book .page.flipped:nth-child(even) {
+  pointer-events: all;
+  transform: rotateY(0deg);
+}
+
+.book .page.flipped:nth-child(even):hover {
+  transform: rotateY(15deg);
+}
+
+.book .page.flipped:nth-child(even):hover:before {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.book .page.flipped:nth-child(even):before {
+  background: rgba(0, 0, 0, 0);
+}
+
+.page-content4 img {
+  padding-top: 30%;
+  
+  width: 60%; /* Set the width to 100px */
+  height: 100; /* Automatically adjust the height to maintain the aspect ratio */
+}
+
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Montserrat', sans-serif;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.page:nth-child(odd) {
+  background-position: right top;
+}
+.slider-container {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  background-color: #f8f8f8; /* Set your desired background color */
+  padding: 20px;
+}
+
+.slider-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container-title {
+  font-size: 28px;
+  color: #333;
+}
+
+.slider {
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  flex: 0 0 100%;
+}
+
+.slide-content {
+  position: relative;
+  text-align: center;
+  padding: 20px;
+}
+
+.slide img {
+  max-width: 100%;
+  height: 300px;
+  border-radius: 8px;
+}
+
+.slide h3{
+  font-size: 22px;
+}
+.slide p{
+  line-height: 30px;
+}
+
+.nav-arrows {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.nav-arrows img {
+  width: 50px; /* Adjust the size of your navigation buttons */
+  height: 50px;
+  cursor: pointer;
+}
+.inline {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+footer {
+  background: white; /* Black background */
+  color: black; /* White text */
+  padding-top: 40px;
+  padding-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+/* Container to center the footer content */
+.container {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Row to create columns */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Column styling */
+.footer_column {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #666;
+}
+
+.col-md-3, .col-sm-6 {
+  width: 25%;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .col-md-3, .col-sm-6 {
+      width: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .col-md-3, .col-sm-6 {
+      width: 100%;
+  }
+}
+
+/* Headings */
+.footer_column .heading {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: rgb(121, 219, 252);
+}
+
+/* Horizontal rule */
+.hr {
+  border: 0;
+  border-top: 1px solid #666;
+  margin: 10px 0;
+}
+
+/* Lists */
+.widget_links {
+  list-style: none;
+  padding: 0;
+}
+
+.widget_links li {
+  margin-bottom: 10px;
+}
+
+.widget_links li a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.widget_links li a:hover {
+  color: rgb(121, 219, 252);
+}
+
+/* Address and contact info */
+.address {
+  margin: 10px 0;
+}
+
+.address i {
+  margin-right: 10px;
+}
+
+/* Newsletter form */
+.newsletter .form-group {
+  margin-bottom: 15px;
+}
+
+.newsletter input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.newsletter .btn-submit {
+  background: rgb(121, 219, 252);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.newsletter .btn-submit:hover {
+  background: rgb(16, 195, 255);
+}
+
+/* Copyright */
+.copyright {
+  text-align: center;
+  padding-top: 20px;
+  margin-top: -20px;
+  margin-left: 450px;
+}
+
+#copyAddress {
+  cursor: pointer;
+  width: 50px;
+  height: auto;
+  transition: transform 0.3s ease; /* Add transition for smooth scaling */
+}
+
+#copyAddress.clicked {
+  transform: scale(1.3); /* Scale up the image */
+}
+
+#copiedMessage {
+  display: none; /* Hidden by default */
+  margin-left: 10px;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 15px;
+  opacity: 0;
+  transform: translateY(10px); /* Initial position, slightly down */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for showing/hiding */
+}
+
+#copiedMessage.show {
+  display: inline-block;
+  opacity: 1;
+  transform: translateY(0px); /* Move up when shown */
+  transform: translateX(-5px); /* Move up when shown */
+
+}
+
+.copy-container {
+      display: flex;
+      align-items: center;
+    }
+
+    #map {
+      height: 400px;
+      margin-left: -16px;
+      margin-bottom: -20px;
+      margin-top: -15px;
+      width: 102.3%;
+      border-radius: 0px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      --button_radius: 0.75em;
+      --button_color: rgb(121, 219, 252);
+      --button_outline_color: rgb(81, 185, 237);
+      font-size: 17px;
+      font-weight: bold;
+      border: none;
+      border-radius: var(--button_radius);
+      background: var(--button_outline_color);
+      padding: 0.01px;
+      display: inline-block;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .button_top {
+      display: block;
+      box-sizing: border-box;
+      border: 2px solid var(--button_outline_color);
+      border-radius: var(--button_radius);
+      padding: 0.5em 0.75em;
+      background: var(--button_color);
+      color: white;
+      transform: translateY(-0.2em);
+      transition: transform 0.1s ease;
+    }
+
+    button:hover .button_top {
+      /* Pull the button upwards when hovered */
+      transform: translateY(-0.33em);
+    }
+
+    button:active .button_top {
+      /* Push the button downwards when pressed */
+      transform: translateY(0);
+    }
+
+    .order-online-btn {
+  border: none;
+  position: relative;
+  width: 200px;
+  height: 73px;
+  padding: 0;
+  z-index: 2;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='868' width='2500' viewBox='0 0 726 252.17'%3E%3Cpath d='M483.92 0S481.38 24.71 466 40.11c-11.74 11.74-24.09 12.66-40.26 15.07-9.42 1.41-29.7 3.77-34.81-.79-2.37-2.11-3-21-3.22-27.62-.21-6.92-1.36-16.52-2.82-18-.75 3.06-2.49 11.53-3.09 13.61S378.49 34.3 378 36a85.13 85.13 0 0 0-30.09 0c-.46-1.67-3.17-11.48-3.77-13.56s-2.34-10.55-3.09-13.61c-1.45 1.45-2.61 11.05-2.82 18-.21 6.67-.84 25.51-3.22 27.62-5.11 4.56-25.38 2.2-34.8.79-16.16-2.47-28.51-3.39-40.21-15.13C244.57 24.71 242 0 242 0H0s69.52 22.74 97.52 68.59c16.56 27.11 14.14 58.49 9.92 74.73C170 140 221.46 140 273 158.57c69.23 24.93 83.2 76.19 90 93.6 6.77-17.41 20.75-68.67 90-93.6 51.54-18.56 103-18.59 165.56-15.25-4.21-16.24-6.63-47.62 9.93-74.73C656.43 22.74 726 0 726 0z'/%3E%3C/svg%3E") no-repeat 50% 50%;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='868' width='2500' viewBox='0 0 726 252.17'%3E%3Cpath d='M483.92 0S481.38 24.71 466 40.11c-11.74 11.74-24.09 12.66-40.26 15.07-9.42 1.41-29.7 3.77-34.81-.79-2.37-2.11-3-21-3.22-27.62-.21-6.92-1.36-16.52-2.82-18-.75 3.06-2.49 11.53-3.09 13.61S378.49 34.3 378 36a85.13 85.13 0 0 0-30.09 0c-.46-1.67-3.17-11.48-3.77-13.56s-2.34-10.55-3.09-13.61c-1.45 1.45-2.61 11.05-2.82 18-.21 6.67-.84 25.51-3.22 27.62-5.11 4.56-25.38 2.2-34.8.79-16.16-2.47-28.51-3.39-40.21-15.13C244.57 24.71 242 0 242 0H0s69.52 22.74 97.52 68.59c16.56 27.11 14.14 58.49 9.92 74.73C170 140 221.46 140 273 158.57c69.23 24.93 83.2 76.19 90 93.6 6.77-17.41 20.75-68.67 90-93.6 51.54-18.56 103-18.59 165.56-15.25-4.21-16.24-6.63-47.62 9.93-74.73C656.43 22.74 726 0 726 0z'/%3E%3C/svg%3E") no-repeat 50% 50%;
+  -webkit-mask-size: 100%;
+  cursor: pointer;
+  background-color: transparent;
+  transform: translateY(8px);
+}
+
+.order-online-btn:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0px 0 0 0 white;
+  transition: all 2s ease;
+}
+
+.order-online-btn:hover:after {
+  box-shadow: 0px -13px 56px 12px #ffffffa6;
+}
+
+.order-online-btn span {
+  position: absolute;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 100;
+  left: 50%;
+  top: 39%;
+  letter-spacing: 3px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  color: black;
+  transition: all 2s ease;
+}
+
+.order-online-btn:hover span {
+  color: rgb(243, 235, 235);
+}
+
+.order-online-btn:before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background-color: black;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 1s ease;
+}
+
+.order-online-btn:hover:before {
+  width: 100%;
+}
+
+    .form-control {
+      position: relative;
+      margin: 20px 0 40px;
+      margin-top: 70px;
+      width: 300px;
+      display: inline-block; /* Ensure it stays inline */
+    }
+
+    .form-control input {
+      background-color: transparent;
+      border: 0;
+      border-bottom: 2px #000 solid;
+      display: block;
+      width: 100%;
+      padding: 15px 0;
+      font-size: 18px;
+      color: #000;
+    }
+
+    .form-control input:focus,
+    .form-control input:valid {
+      outline: 0;
+      border-bottom-color: rgb(121, 219, 252);
+    }
+
+    .form-control label {
+      position: absolute;
+      top: 15px;
+      left: 0;
+      pointer-events: none;
+      font-weight: bold;
+    }
+
+    .form-control label span {
+      display: inline-block;
+      font-size: 18px;
+      min-width: 5px;
+      color: #000;
+      transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .form-control input:focus+label span,
+    .form-control input:valid+label span {
+      color: rgb(121, 219, 252);
+      transform: translateY(-30px);
+    }
+
+    .clickable-image {
+    transition: transform 0.2s ease;
+    cursor: pointer;
+  }
+
+  .clickable-image:active {
+    transform: scale(1.2);
+  }
+
+
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <img src="images/restaurant.gif" alt="Logo">
+    </div>
+    <h1>GUER Foodie</h1>
+    <div class="navigation">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="loginsignup.html">Order Now</a></li>
+    </ul>
+    </div>
+  </nav>
+
+  <section class="abt">
+    <video autoplay loop muted>
+      <source src="video/d.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="initial-content">
+      <img src="images/logo1.png" alt="Initial Image">
+    </div>
+    <div class="hidden-content">
+      <div class="box">
+        <span style="font-size: 29px;">G</span>azing at GUER’s illustrious menu, one cannot help but marvel at the great culinary brilliance
+      </div>
+      <div class="box">
+        <span style="font-size: 29px;">U</span>nveiling an array of delights, our steak holds the unrivaled reputation of being the greatest
+      </div>
+      <div class="box">
+        <span style="font-size: 29px;">E</span>very bite is a journey of exquisite flavors, with promising of memorable culinary experiences
+      </div>
+      <div class="box">
+        <span style="font-size: 29px;">R</span>elishing in their offerings, one can also savor ddelectable desserts and refreshing beverages
+      </div>
+    </div>
+  </section>
+
+  <section class="book-section">
+    <div class="book">
+      <div id="pages" class="pages">
+        <div class="page">
+          <h3 style="margin-top: 75px; font-size: 34px;">Chef's Exclusive Selections</h3>
+          <h3 style="margin-top: 40px; font-size: 22px;">Handpicked by Our Master Chefs</h3>
+          
+          
+          <h3 style="margin-top: 50px; font-size: 22px;">Lim Jun Leh</h3>
+          <h3 style="margin-top: 20px; font-size: 22px;">Goo Kai Han</h3>
+          <h3 style="margin-top: 20px; font-size: 22px;">Bong Li Zhen</h3>
+          <h3 style="margin-top: 20px; font-size: 22px;">Chai Jun Quan</h3>
+          <h3 style="margin-top: 20px; font-size: 22px;">Chong Min Ngee</h3>
+
+        </div>
+        <div class="page page-content"><img src="images/m1.jpg" alt="Page 1 Image"></div>
+        <div class="page">
+          <h3 style="font-size: 40px; margin-top: 130px;">Prime Ribeye Steak</h3>
+          <p style="margin-top: 70px; margin-left: 55px;">Indulge in our succulent Prime Ribeye Steak, expertly grilled to perfection 
+            and served with a rich red wine reduction. Tender, juicy, and bursting with flavor
+            , it's a true delight for steak enthusiasts at GUER.</p>
+        </div>
+        <div class="page page-content"><img src="images/s.jpg" alt="Page 2 Image"></div>
+        <div class="page">
+          <h3 style="font-size: 40px; margin-top: 110px;">California Chicken<br><br>Club Sandwich</h3>
+          <p style="margin-top: 50px;">Try our California Chicken Club Sandwich, featuring grilled chicken breast, avocado, bacon,
+             lettuce, tomato, and mayonnaise on toasted sourdough bread. A fresh and flavorful choice
+             inspired by West Coast cuisine.</p>
+        </div>
+        <div class="page page-content"><img src="images/salad.jpg" alt="Page 3 Image"></div>
+        <div class="page">
+          <h3 style="font-size: 40px; margin-top: 110px;">Santa Fe Grilled<br><br>Chicken Salad</h3>
+          <p style="margin-top: 50px;">Taste our Santa Fe Grilled Chicken Salad, featuring grilled chicken breast, mixed greens, 
+            black beans, roasted corn, avocado, and tortilla strips tossed in a zesty cilantro lime 
+            dressing. A fresh and vibrant southwestern-inspired dish.</p>
+        </div>
+        <div class="page page-content"><img src="images/dess.jpg" alt="Page 3 Image"></div>
+        <div class="page">
+          <h3 style="font-size: 40px; margin-top: 110px;">Colorado Chocolate<br><br>Lava Cake</h3>
+          <p style="margin-top: 50px;">Indulge in our Colorado Chocolate Lava Cake, a warm and gooey chocolate cake with a molten 
+            chocolate center, served with a scoop of vanilla bean ice cream. A decadent and 
+            irresistible dessert for chocolate lovers.</p>
+        </div>
+        <div class="page page-content4"><img src="images/logo1.png" alt="Page 4 Image"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="slider-section" class="slider-container">
+    <div class="slider-content">
+      <div class="title-section">
+        <h2 class="container-title">Meet Our Team</h2>
+      </div>
+      <div class="slider">
+        <div class="slides">
+          <div class="slide">
+            <div class="slide-content">
+              <img src="images/Goo Kai Han.png" alt="Speciality 1">
+              <div class="text">
+                <h3>CEO</h3>
+                <p>Mr. Goo Kai Han is the esteemed CEO of GUER. <br>His leadership ensures GUER delivers a culinary experience 
+                  of quality and innovation.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="slide-content">
+              <img src="images/Chong.png" alt="Speciality 2">
+              <div class="text">
+                <h3>Head Chef</h3>
+                <p>Mr. Chong Min Ngee is the Head Chef of GUER.<br>Under his guidance, the kitchen consistently 
+                  delivers dishes of excellence and creativity.</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="slide-content">
+              <img src="images/Lim Jun Leh.png" alt="Speciality 3">
+              <div class="text">
+                <h3>Restaurant Manager</h3>
+                <p>Mr. Lim Jun Leh is the Restaurant Manager of GUER.<br>His attention to 
+                  customer satisfaction ensure every guest enjoys a delightful dining experience.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="slide-content">
+              <img src="images/Bong Li Zhen.png" alt="Speciality 4">
+              <div class="text">
+                <h3>Sous Chef</h3>
+                <p>Mr. Bong Li Zhen is the Sous Chef of GUER.<br>His culinary expertise and dedication to excellence 
+                  ensure every dish served is a masterpiece.</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="slide-content">
+              <img src="images/Chai Jun Quan.png" alt="Speciality 5">
+              <div class="text">
+                <h3>Beverage Manager</h3>
+                <p>Mr. Chai Jun Quan is the Beverage Manager of GUER.<br>His innovative approach to mixology 
+                  ensures every drink perfectly complements the exquisite dishes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-arrows">
+          <img id="prev" src="images/import2.png" alt="Previous Slide" onclick="prevSlide()" class="clickable-image">
+          <img id="next" src="images/import.png" alt="Next Slide" onclick="nextSlide()" class="clickable-image">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <section style="background-color: #ffffff; text-align: center; padding: 20px;">
+    <h2>Physical Location of GUER Foodie</h2>
+    <p>Jalan Ayer Keroh Lama, 75450 Bukit Beruang, Melaka</p>
+    <div class="copy-container">
+    <p class="inline" style="margin-left: 650px;">Copy Address: </p>
+    <img id="copyAddress" src="images/copy.gif" alt="Copy Address" style="cursor: pointer; width: 50px; height: auto;" onclick="copyAddress()">
+    <span id="copiedMessage">Copied!</span>
+    </div>
+    <br><br>
+    <div id="map"></div>
+    <div class="form-control">
+      <input type="text" id="userAddress" required>
+      <label for="userAddress"><span>Enter your area</span></label>
+    </div>
+    <button onclick="calculateDistance()">
+      <span class="button_top">Calculate Distance</span>
+    </button>
+    <p id="result"></p>
+  </section>
+  
+  <footer class="padding-top bg_black">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 footer_column">
+                <h4 class="heading">Who are we?</h4>
+                <hr class="half_space">
+                <p class="half_space"></p>
+                <p>We are an ordering food company named GUER, based in Melaka, Malaysia. Launched in Melaka, GUER has grown from a home project to one of the largest food aggregators in the world.
+                   We are present in 10 countries and 10+ cities globally, enabling our vision of better food for more people. We not only connect people to food in every context but work closely 
+                   with restaurants to enable a sustainable ecosystem.</p>
+            </div>
+            <div class="col-md-3 col-sm-6 footer_column">
+                <h4 class="heading">Quick Links</h4>
+                <hr class="half_space">
+                <ul class="widget_links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="loginsignup.html">Order Now</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 footer_column">
+                <h4 class="heading">Newsletter</h4>
+                <hr class="half_space">
+                <p class="icon"><i class="icon-dollar"></i>Sign up with your name and email to get fresh updates.</p>
+                <div id="result1" class="text-center"></div>        
+                <form action="http://themesindustry.us13.list-manage.com/subscribe/post-json?u=4d80221ea53f3a4487ddebd93&id=494727d648&c=?" method="get" onSubmit="return false" class="newsletter">
+                    <div class="form-group">
+                        <input type="email" placeholder="E-mail Address" required name="EMAIL" id="EMAIL" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn-submit button3" value="Subscribe" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3 col-sm-6 footer_column">
+              <h4 class="heading">Get in Touch</h4>
+              <hr class="half_space">
+              <p>1, Jalan Ayer Keroh Lama, 75450 Bukit Beruang, Melaka</p>
+              <p>(+60) 1234567890</p>
+              <p><a href="mailto:1211101231@student.mmu.edu.my">1211101231@student.mmu.edu.my</a></p>
+          </div>           
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copyright clearfix">
+                    <p>Copyright &copy; 2024 GUER. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+  <script>
+        var pages = document.getElementsByClassName('page');
+        for(var i = 0; i < pages.length; i++) {
+          var page = pages[i];
+          if (i % 2 === 0) {
+            page.style.zIndex = (pages.length - i);
+          }
+        }
+        
+     document.addEventListener('DOMContentLoaded', function() {
+  const pages = document.querySelectorAll('.page');
+  let isFlipping = false;
+
+  // Preload images
+  const images = document.querySelectorAll('img');
+  images.forEach((img) => {
+    const src = img.getAttribute('src');
+    const preloadedImage = new Image();
+    preloadedImage.src = src;
+  });
+
+  // Force CSS animation preloading
+  pages.forEach((page) => {
+    page.style.willChange = 'transform';
+  });
+
+  // Add event listeners for flipping
+  pages.forEach((page, index) => {
+    page.pageNum = index + 1;
+
+    page.addEventListener('click', () => {
+      if (isFlipping) return; // Prevent multiple flips at once
+      isFlipping = true;
+
+      if (page.pageNum % 2 === 0) {
+        page.classList.remove('flipped');
+        page.previousElementSibling.classList.remove('flipped');
+      } else {
+        page.classList.add('flipped');
+        page.nextElementSibling.classList.add('flipped');
+      }
+
+      // Use requestAnimationFrame to reset the flipping state
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          isFlipping = false;
+        });
+      }, 700); // Match this duration to your CSS transition duration
+    });
+  });
+});
+  </script>
+
+<script>
+  function copyAddress() {
+    var address = "Jalan Ayer Keroh Lama, 75450 Bukit Beruang, Melaka";
+
+    navigator.clipboard.writeText(address)
+      .then(() => {
+        // Show copied message and apply effects after copying
+        var imageElement = document.getElementById("copyAddress");
+        var messageElement = document.getElementById("copiedMessage");
+
+        // Add the clicked class for scaling effect
+        imageElement.classList.add("clicked");
+
+        // Show the copied message
+        messageElement.classList.add("show");
+
+        // Remove the clicked class after 300ms to return the image to its original size
+        setTimeout(function() {
+          imageElement.classList.remove("clicked");
+        }, 300);
+
+        // Hide the copied message after 1 second
+        setTimeout(function() {
+          messageElement.classList.remove("show");
+        }, 1000);
+      })
+      .catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+  }
+</script>
+
+<script>
+
+  // Initialize the map
+  var map = L.map('map', {
+    center: [2.24890, 102.27572],
+    zoom: 17,
+    scrollWheelZoom: false
+  });
+
+  // Add tile layer to the map
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+  }).addTo(map);
+
+  // Custom marker icon
+  var customIcon = L.icon({
+    iconUrl: 'images/logo1.png', // Use a custom marker image
+    iconSize: [38, 38],
+    iconAnchor: [19, 38],
+    popupAnchor: [0, -38]
+  });
+
+  // Add a marker with a popup
+  var marker = L.marker([2.24890, 102.27553], { icon: customIcon }).addTo(map)
+    .bindPopup("<b>GUER's physical location</b>")
+    .openPopup();
+
+    function calculateDistance() {
+  var userAddress = document.getElementById('userAddress').value;
+  var url = 'https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(userAddress);
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data.length === 0) {
+        alert('Address not found');
+        return;
+      }
+
+      var userLat = data[0].lat;
+      var userLon = data[0].lon;
+      var restaurantLat = 2.24890;
+      var restaurantLon = 102.27553;
+
+      var distance = haversineDistance(userLat, userLon, restaurantLat, restaurantLon);
+      var result = document.getElementById('result');
+
+      if (distance > 10) {
+        result.innerHTML = 'The distance is ' + distance.toFixed(2) + ' km. Please click here to  <br><button class="order-online-btn" onclick="orderOnline()"><span>Order Now</span></button>';
+      } else {
+        result.innerHTML = 'The distance is ' + distance.toFixed(2) + ' km. It is just nearby, see you at our physical restaurant!';
+      }
+    })
+    .catch(err => {
+      console.error('Error:', err);
+    });
+}
+
+  function haversineDistance(lat1, lon1, lat2, lon2) {
+    function toRad(x) {
+      return x * Math.PI / 180;
+    }
+
+    var R = 6371; // km
+    var dLat = toRad(lat2 - lat1);
+    var dLon = toRad(lon2 - lon1);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+    return d;
+  }
+
+  function orderOnline() {
+    alert("Redirecting to Online Ordering Page...");
+    // Add your online order page URL here
+    window.location.href = 'loginsignup.html';
+  }
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  let currentSlide = 0;
+  let autoplayInterval;
+
+  // Function to show current slide
+  function showSlide(n) {
+    slides.forEach(slide => {
+      slide.style.display = 'none';
+    });
+    slides[n].style.display = 'block';
+  }
+
+  // Function to move to next slide
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+    resetAutoplay();
+  }
+
+  // Function to move to previous slide
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+    resetAutoplay();
+  }
+
+  // Autoplay functionality
+  function startAutoplay() {
+    autoplayInterval = setInterval(() => {
+      nextSlide();
+    }, 5000); // Adjust autoplay interval as needed (in milliseconds)
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  // Initial display of first slide
+  showSlide(currentSlide);
+  startAutoplay();
+
+  // Event listeners for navigation buttons
+  document.getElementById('prev').addEventListener('click', function () {
+    prevSlide();
+  });
+
+  document.getElementById('next').addEventListener('click', function () {
+    nextSlide();
+  });
+});
+
+</script>
+
+</body>
+</html>
